@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+	form{
+		border : 1px solid blue;
+		margin : 30px;	
+		padding : 30px;
+		width : 50%;
+	}
+	
+	label{
+	/* 인라인요소에 크기 조절 
+		display : inline(크기 조절 불가) block(줄바뀜)
+		inline-block : 줄이 바뀌지 않으면서 크기 조절 가능 
+	*/
+		display : inline-block;
+		width : 100px;
+		height : 40px;
+	}
