@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/pubilc.css">
+<script>
+	function varlet(){
+		var vd = document.getElementById('dd1');
+		
+		var vd = document.getElementById('dd2');
+		
+		cr = parseInt(Math.random() * 256); // var을 적지 않으면 전역변수
+		cg = parseInt(Math.random() * 256); 
+		cb = parseInt(Math.random() * 256); 
+		
+		cr = cr.toString(16);
+		cg = cg.toString(16);
+		cb = cb.toString(16);
+		
+		vd.style.background = "#" + cr + cg + cb;
+	}
+</script>
+
+</head>
+<body>
+<input type="button" onclick="varlet()">
+<br>
+	<div id="dd1"></div>
+	<div id="dd2"></div>
+</body>
+</html>
