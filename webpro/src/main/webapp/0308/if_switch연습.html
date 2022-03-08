@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+
+<script>
+function proc1(){
+	// 두 수와 연산자 입력
+	su1 = prompt("수1 입력 : ");
+	su2 = prompt("수2 입력 : ");
+	opr = prompt("연산자 입력: ");
+	
+	// opr비교 -연산
+	switch(opr){
+	case "+":
+		result1 = parseInt(su1) + parseInt(su2);
+		break;
+	case "-":
+		result1 = su1 - su2;
+		break;
+	case "*":
+		result1 = su1 * su2;
+		break;
+	case "/":
+		result1 = su1 / su2;
+		break;
+	}
+	
+	// id=result검색 -출력 -innerHTML
+	str = "입력1 : " + su1 + "<br>";
+	str += "입력2 : " + su2 + "<br>";
+	str += su1 + opr + su2 + " = " + result1 + "<br>";
+	
+	document.getElementById('result1').innerHTML = str; //innerHTM : html 내에서 찾는다.
+
+}
+
+function proc2(){
+	// 입력
+	in1 = prompt("첫번째 입력");
+	in2 = prompt("두번째 입력");
+	
+	// 비교
+	if(in1 == in2){
+		res = "비김";
+	}else if(in1 == "가위" && in2 == "보" || 
+			in1 == "보" && in2 == "바위" ||
+			in1 == "바위" && in2 == "가위"){
+		res = "첫번째 사람 이김";
+	}else{
+		res = "두번째 사람 이김";
+	}
+	
+	// 결과 출력
+	str = `첫번째 사람 : ${in1} <br>`;
+	str += `두번째 사람 : ${in2} <br>`;
+	str += `결과 : ${res}`;
+	document.querySelector('#result2').innerHTML = str;
+	
+	
+}
+</script>
+</head>
+<body>
+	<div class="box">
+	<pre>
+	두 수와 연산자를 입력받는다. -prompt
+	결과를 출력한다. innerHTML - id=result1
+	</pre>
+	
+	<input type="button" value="확인" onclick="proc1()">
+	<br>
+	<div id="result1"></div>
+	</div>
+	
+	<div class="box">
+	<pre>
+	두 사람의 가위바위보를 각각 입력한다. -prompt
+	결과를 출력한다. innerHTML - id=result2
+	</pre>
+	
+	<input type="button" value="확인" onclick="proc2()">
+	<br>
+	<div id="result2"></div>
+	</div>
+</body>
+</html>
