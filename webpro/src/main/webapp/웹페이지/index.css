@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+header{
+	width: 100%;
+    height: 100px;
+	background: lightyellow;
+	border-radius: 50px;
+}
+
+nav{
+	width: 100%;
+	height: 70px;
+	background: lightgreen;
+	border-radius: 50px;
+	text-align: center;
+}
+
+#left{
+	width: 17%;
+	height: 600px;
+	float: left;
+	background: lightpink;
+	border-radius: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#right{
+	width: 17%;
+	height: 600px;
+	float: right;
+	background: lightpink;
+	border-radius: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+footer{
+	width: 100%;
+    height: 50px;
+	background: skyblue;
+	border-radius: 50px;
+	clear: both;
+	text-align: center;
+}
+
+#main{
+	float: left;
+}
+
+#img1{
+	width: 100px;
+	height: 60px;
+	float: left;
+	padding: 3px;
+	vertical-align: middle;
+}
+
+ul{
+	list-style-type: none;
+	margin: 15px;
+}
+
+nav a{
+	text-align: center;
+	line-height : 70px;
+	margin : 30px;
+}
+
+#left ul{
+	background: #ffccff;
+	width: 77%;
+	padding: 9px;
+	float: left;
+	margin-top: 50px;
+}
+
+#left a{
+	color: white;
+}
+
+h4{
+	margin: 20px;
+}
+
+#rdiv{
+	margin: 10px;
+}
+
+label {
+	/* 인라인요소에 크기 조절 
+		display : inline(크기 조절 불가) block(줄바뀜)
+		inline-block : 줄이 바뀌지 않으면서 크기 조절 가능 
+	*/
+	display: inline-block;
+	width: 30%;
+	height: 40px;
+}
+
+p{
+	padding-top: 15px;
+}
+
+h1 a{
+	display: inline-block;
+    text-decoration-line: none;
+    margin-left: 25px;
+}
+
+h1{
+	margin: 20px;
+	padding: 20px;
+	
+}
+
+ul li{
+	border-bottom: 1px solid #baa29c;
+}
+
+
+iframe {
+	width : 100%;
+	height : 100%;
+}
+
+section {
+	width : 100%;
+	height : 100%;
+}
+
+article {
+ 	width : 100%;
+	height : 100%;
+}
+
+#sdi{
+	width: 50%;
+	height: 600px; 
+	float: left;
+}
