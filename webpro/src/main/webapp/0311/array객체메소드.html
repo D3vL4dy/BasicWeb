@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+
+<style>
+.box input[type=button] {
+	margin: 5px;
+	width: 100px;
+}
+</style>
+<script>
+var arr = ["사과", "복숭아", "딸기", "사과", "바나나", "수박", "사과"];
+
+function proc1(){
+	fr = prompt("찾는 과일을 입력하세요.");
+	idx = arr.indexOf(fr);
+	
+	str = "찾는 이름 : " + fr + "<br>";
+//	str = `찾는 이름 : ${fr} <br>`;
+	if(idx == -1){
+		str += `배열에 없는 아이템입니다. <br>`;
+	} else{
+		str += `${idx} 번째 있습니다.`;
+	}
+	
+	document.getElementById("result1").innerHTML = str;
+}
+
+function proc2(){
+	fr = prompt("찾는 과일을 입력하세요.");
+	idx = arr.lastIndexOf(fr);
+	
+	str = "찾는 이름 : " + fr + "<br>";
+//	str = `찾는 이름 : ${fr} <br>`;
+	if(idx == -1){
+		str += `배열에 없는 아이템입니다. <br>`;
+	} else{
+		str += `${idx} 번째 있습니다.`;
+	}
+	
+	document.getElementById("result2").innerHTML = str;
+}
+
+function proc3(){
+	fr = prompt("찾는 과일을 입력하세요.");
+	start = 0;
+	
+	str = `찾는 과일 : ${fr} <br>`;
+	
+	while(true){
+		idx = arr.indexOf(fr, start);	
+		
+		// idx = 0, 3, 6
+		if(idx == -1) break;
+		
+		str += `${idx}&nbsp;&nbsp; `;
+		start = idx + 1;
+	}
+	str += `번째 있습니다.`;
+	
+	document.getElementById("result3").innerHTML = str;
+}
+
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		arr = ["사과", "복숭아", "딸기", "사과", "바나나", "수박", "사과"]
+		</pre>
+
+		<input type="button" value="indexOf" onclick="proc1()"> 
+		<input type="button" value="LastIndexOf" onclick="proc2()"> 
+		<input type="button" value="indexOf_start" onclick="proc3()">
+		<div id="result1"></div>
+		<div id="result2"></div>
+		<div id="result3"></div>
+	</div>
+
+</body>
+</html>

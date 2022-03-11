@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+	let circle = {
+		rad : 5,
+
+		getArea : function() {
+			return this.rad * this.rad * Math.PI;
+		},
+
+		getCircle : function() {
+			return (this.rad * 2) * Math.PI;
+		}
+	}
+
+	function print(res) {
+		let str = "";
+
+		if (typeof circle.name != undefined) {
+			str += `이름 : ${circle.na} <br>`;
+		}
+
+		str += `반지름 : ${circle.rad} <br>`;
+
+		str += `면적 : ${circle.getArea().toFixed(2)} <br>`;
+		str += `둘레 : ${circle.getCircle().toFixed(2)} <br>`;
+
+		document.getElementById(res).innerHTML = str;
+	}
+
+	function proc1() {
+		print("result1");
+	}
+
+	function proc2() {
+		ban = prompt("반지름 입력");
+		name = prompt("이름 입력");
+
+		circle.rad = ban;
+		circle.na = name;
+
+		print("result2");
+	}
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		circle 객체 생성
+		속성 : 반지름(rad)
+		동작 : getArea(), getCircle()
+		
+		버튼 클릭하면 정보 출력
+		</pre>
+		<input type="button" value="확인" onclick="proc1()">
+		<div id="result1"></div>
+	</div>
+
+	<div class="box">
+		<pre>
+		버튼 클릭하면 이름과 반지름을 입력하여 계산하고 정보 출력하기
+		</pre>
+		<input type="button" value="확인" onclick="proc2()">
+		<div id="result2"></div>
+	</div>
+</body>
+</html>
