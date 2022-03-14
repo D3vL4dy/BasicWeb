@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<style>
+.box input[type=button] {
+	margin: 5px;
+	width: 100px;
+}
+</style>
+<script>
+var arr = ["사과", "복숭아", "딸기", "사과", "바나나", "수박", "사과"];
+
+function proc1(){
+	var arr2 = [100, 200, 500, 700, 1000];
+	
+	str = "arr : " + arr + "<br>";
+	str += "arr2 : " + arr2 + "<br>";
+	
+	arrhap = arr.concat(arr2);
+	
+	str += "합친배열 : " + arrhap + "<br>";
+	
+	document.getElementById('result1').innerHTML = str;
+}
+
+function proc2(){
+	str = "배열 : " + arr + "<br>";
+	str += "배열길이 : " + arr.length + "<br>";
+	
+	for(i=0; i<arr.length; i++){
+		str += i + "번째 요소 : " + arr[i] + "<br>";
+	}
+	
+	arrjoin = arr.join();
+	
+	str += "arr.join() : " + arrjoin + "<br>";
+	str += "문자열길이 : " + arrjoin.length + "<br>";
+	
+	for(i=0; i<arrjoin.length; i++){
+		str += i + "번째 요소 : " + arrjoin[i] + "<br>";
+	}
+	
+	document.getElementById('result2').innerHTML = str;
+}
+
+function proc3(){
+	str = "원래배열 : " + arr + "<br>";
+	
+	arr.sort();
+	
+	str += "arr.sort() 후 : " + arr + "<br>";
+	
+	document.getElementById('result3').innerHTML = str;
+	
+}
+
+function proc4(){
+	var arr2 = [100, 2000, 500, 2010, 1000];
+	
+	str = "원래배열 : " + arr2 + "<br>";
+	arr2.sort();
+	
+	str += "사전순 arr2.sort() : " + arr2 + "<br>";
+	
+	arr2.sort(function(a, b) { return a - b });
+	str += "크기순 arr2.sort : " + arr2 + "<br>";
+	
+	document.getElementById('result4').innerHTML = str;
+}
+
+function proc5(){
+	//arr = [];
+	arr = new Array();
+	
+	while(true){
+		
+		// 입력
+		input = prompt("이름을 입력하세요.");
+		
+		// input값이 없거나"" null이면 종료
+		if(input == "" || input == null) break;
+		
+		// 배열에 저장 -push
+		
+		
+	}
+	
+}
+
+function proc6(){
+	// 배열 선언
+	arr = new Array();
+	
+	// 반복문
+	for(i=0; ; i++){ // while(true)와 같음
+		
+		// 랜덤 발생(1 ~ 100)
+		rnd = parseInt(Math.random()*100 +1);
+		
+		// 중복 비교 -제거
+		idx = arr.indexOf(rnd); // 해당 인덱스의 값이 없으면 -1 반환
+		if(idx == -1) arr.push(rnd);
+		
+		if(arr.length >= 5) break;
+	}
+	
+	document.getElementById('result6').innerHTML += arr + "<br>";
+	
+}
+
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		a.concat(b); a배열과 b배열을 하나로 합친다.
+		a.join(b); a배열을 문자열로 변환 
+		</pre>
+
+		<input type="button" value="concat" onclick="proc1()"> <input
+			type="button" value="join" onclick="proc2()"> <input
+			type="button" value="sort(사전순)" onclick="proc3()"> <input
+			type="button" value="sort(크기순)" onclick="proc4()">
+		<div id="result1"></div>
+		<div id="result2"></div>
+		<div id="result3"></div>
+		<div id="result4"></div>
+	</div>
+
+	<div class="box">
+		<pre>
+		사람 이름을 계속 입력받아 배열에 저장하고
+		그 저장된 이름을 출력하는 프로그램
+		</pre>
+
+		<input type="button" value="문제1" onclick="proc5()">
+		<div id="result5"></div>
+	</div>
+
+	<div class="box">
+		<pre>
+		서로 중복되지 않는 정수 5개를 입력받아 출력하는 프로그램
+		</pre>
+
+		<input type="button" value="문제2" onclick="proc6()">
+		<div id="result6"></div>
+	</div>
+
+</body>
+</html>
