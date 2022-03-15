@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+	function proc1() {
+		// 주민번호 입력 - 110326-4213450
+		input = prompt("주민번호 입력");
+
+		// 추출하기 11, 03, 26, 4 - 문자열
+		yy = input.substring(0, 2);
+		mm = input.substring(2, 4);
+		dd = input.substring(4, 6);
+		gend = input.substr(7, 1);
+
+		// 태어난 년도 구하기 ==>
+		if (gend == "3" || gend == "4") {
+			byear = 20 + yy;
+		} else {
+			byear = 1900 + parseInt(yy);
+		}
+
+		// 생년월일 2011년 3월 26일 형태 구성
+		birth = byear + "년 " + mm + "월 " + dd + "일 <br>";
+
+		// 성별 구하기 - 1,3`2,4
+		if (gend == "1" || gend == "3") {
+			gender = "남자";
+		} else {
+			gender = "여자";
+		}
+
+		// 나이 구하기 - 현재 년도 - 태어난 년도	
+		today = new Date();
+		age = today.getFullYear() - byear;
+
+		// 출력
+		out = "주민번호 : " + input.slice(0, 8) + "******<br>";
+		out += "생년월일 : " + birth + "<br>";
+		out += "성별 : " + gender + "<br>";
+		out += "나이 : " + age + "<br>";
+
+		document.getElementById('result1').innerHTML = out;
+	}
+	
+	function proc2(){
+		sum = 0;
+		
+		// 곱하는 값
+		multi = "234567892345";
+		
+		// 입력
+		input = prompt("주민번호 입력");
+		
+		// 작업변수
+		code = input.replace("-", "");
+		
+		
+		// 반복문 이용 -각 1자리씩 추출
+		for(i=0; i<multi.length; i++){
+			sum += multi[i] * code.substr(i, 1);
+		}
+		
+		// sum을 11로 나눈 나머지 구하고 11에서 뺀다.
+		result = 11 - (sum % 11);
+			
+		// result의 결과는 0~11, 10과 11은 1로 변경
+		if(result == 10 || result == 11){
+			result = 1;
+		}
+		
+		// 주민번호 마지막 한자리와 result 값이 같은지 비교
+		if(input.substr(-1, 1) == result){
+			out = "주민번호 일치<br>";
+		}else{
+			out = "주민번호 불일치<br>";
+		}
+		
+		out += "주민번호 : " + input.slice(0, 8) + "******<br>";
+		
+		document.getElementById('result2').innerHTML = out
+	}
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		주민등록번호를 입력 받아 생년월일과 성별을 출력하는 프로그램을 작성하시오.(입력은 prompt로 입력받는다.)
+		예) 주민등록번호를 110326-4432618로 입력 받은 경우
+		생일 : 2011년 3월 26일
+		성별 : 여자  나이:
+		</pre>
+
+		<input type="button" value="확인" onclick="proc1()">
+		<div id="result1"></div>
+	</div>
+
+	<div class="box">
+		<pre>
+		주민등록번호를 입력 받아 주민등록번호의 유효성을 검사하는 프로그램을 작성하시오.(ABCDEF-GHIJKLM)
+		A*2 + B*3 + ... + H*9 + I*2 + ... + L*5 의 총합을 구한다.
+		1번의 합을 11로 나눈 나머지를 구한다.
+		11에서 2번의 결과를 뺀다.
+		3번의 결과가 0~9이면 값 그대로, 10이면 0, 11이면 1로 변환
+		4번의 결과와 M자리의 값이 같으면 맞는 번호이다.
+		</pre>
+
+		<input type="button" value="확인" onclick="proc2()">
+		<div id="result2"></div>
+	</div>
+</body>
+</html>
