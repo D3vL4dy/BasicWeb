@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+	window.onload = function() {
+		vimage = document.getElementsByClassName('dimg');
+
+		// 이벤트 일괄 등록
+		for (i = 0; i < vimage.length; i++) {
+			// 파란색 div를 클릭하면 
+			vimage[i].addEventListener('click', divImage);
+		}
+	}
+
+	function divImage() {
+		str = this.firstChild.data;
+
+		//랜덤을 5~10 생성 *6 +5
+		rand = parseInt(Math.random() * 6 + 5);
+
+		// 할인율 5% - textNode를 생성
+		text = document.createTextNode("할인율" + rand + "%");
+
+		// p태그를 생성
+		ptag = document.createElement('p');
+
+		// p태그에 textNode를 자식으로 추가한다.
+		ptag.appendChild(text);
+
+		// p태그를 파란색 div에 자식으로 추가한다.
+		this.appendChild(ptag);
+
+	}
+</script>
+
+<style>
+#result1 {
+	box-sizing: border-box;
+}
+
+.dimg {
+	width: calc(20% - 20px);
+	height: auto;
+	display: inline-block;
+}
+
+img {
+	width: 100%;
+	height: 70%;
+	margin: 10px;
+	padding-bottom: 30px;
+}
+</style>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		파란색 div를 클릭하면 
+		랜덤을 5~10 생성 *6 +5
+		할인율 5% - textNode를 생성
+		
+		p태그를 생성
+		p태그에 textNode를 자식으로 추가한다.
+		
+		p태그를 파란색 div에 자식으로 추가한다.
+		
+		클릭이벤트를 각각 div에 onclick으로 설정하지 않고 일괄등록 방식으로 한다.
+		</pre>
+		
+		<div id="result1">
+		
+			<div class="dimg">
+				<img src="../images/국화1.jpg" alt="국화1.jpg">
+			</div>
+		
+			<div class="dimg">
+				<img src="../images/국화2.jpg" alt="국화2.jpg">
+			</div>
+		
+			<div class="dimg">
+				<img src="../images/국화3.jpg" alt="국화3.jpg">
+			</div>
+		
+			<div class="dimg">
+				<img src="../images/국화4.jpg" alt="국화4.jpg">
+			</div>
+		
+		</div>
+	</div>
+</body>
+</html>
