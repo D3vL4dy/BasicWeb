@@ -38,7 +38,6 @@ function datapro() {
 		return false;
 	}
 	//----------------------------------------------------------------
-	
 	// 아이디 검증
 	idvalue = f.userid.value.trim();
 	
@@ -59,6 +58,29 @@ function datapro() {
 	
 	if(!(idreg.test(idvalue))){
 		alert("아이디 형식 오류입니다.");
+		return false;
+	}
+	//----------------------------------------------------------------
+	// 비밀번호
+	passvalue = f.pass.value.trim();
+	
+	// 공백
+	if(passvalue.length < 1){
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}
+	
+	// 길이
+	if(passvalue.length < 4 || passvalue.length > 12){
+		alert("비밀번호는 4~12사이입니다.");
+		return false;
+	}
+	
+	// 정규식
+	passreg = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{4,12}$/; 
+	
+	if(!(passreg.test(passvalue))){
+		alert("비밀번호 형식 오류입니다.");
 		return false;
 	}
 	//----------------------------------------------------------------
