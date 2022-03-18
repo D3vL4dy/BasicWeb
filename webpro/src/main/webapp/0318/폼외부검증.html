@@ -14,23 +14,38 @@
 	}
 	
 	function passcheck(){
+		passvalue = document.getElementById('pass2').value.trim();
+		
+		passreg = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{4,12}$/; 
+		
+		if(!(passreg.test(passvalue))){
+			alert("비밀번호 형식 오류입니다.");
+			return false;
+		}
+		
+		alert("비밀번호 성공");
+	}
+/*	
+	function passcheck(){
 		strvalue = ["원", "500원", "2000원", "10000원"];
 		
-		reg = /.+(?=원)/;
+		reg = /.*(?=원)/;
 		
 		str = "";
 		for(i=0; i<strvalue.length; i++){
-			str += strvalue[i].match(reg) + "\n";
+			//str += strvalue[i].match(reg) + "\n";
+			str += reg.test(strvalue[i]) + "\n";
 		}
 
 		alert(str);
 	}
+*/
 </script>
 </head>
 <body>
 	<div class="box">
 		<pre>
-		비밀번호 체크 - 영문대소문자, 숫자, 특수문자가 반드시 1개 이상씩 포함
+		비밀번호 체크 - 영문대/소문자, 숫자, 특수문자가 반드시 1개 이상씩 포함
 		4~12글자 사이로 입력한다.
 		
 		전방탐색을 이용한다.
@@ -39,7 +54,7 @@
 		</pre>
 		
 		<label>비밀번호</label>
-		<input type='password' name="pass" id='pass2' ><br>
+		<input type='text' name="pass" id='pass2' ><br>
 		
 		<input type="button" value="확인" onclick="passcheck()"> 
 			
