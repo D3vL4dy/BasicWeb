@@ -4,36 +4,75 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/public.css">
+<style>
+img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+</style>
 <script>
-	function proc1(){
+	rem = null;
+	
+	function proc1(but){
 		
 		// 스타일로 설정된 테두리를 지운다. 
+
+		
 		// 초기값 변수 하나를 null로 주고 if(!null) 이렇게 ==> 할인율
-		
-		
-		// 시작 버튼 감추기 - 더 이상 클릭하지 못하도록
-		
-		// result1을 검색
-		vres1 = ;
-		
-		a = 1초마다 한번씩{ // setInterval
-		
-		// result1의 첫번째 자식을 선택한다.
-		child = ;
-		
-		// 마지막 자식으로 추가한다. -appendChild()
+		if(rem != null){
+			rem.parentNode.removeChild(vres1);
 		}
 		
+		// 시작 버튼 감추기 - 더 이상 클릭하지 못하도록
+		but.style.display = "none";
+		
+		// result1을 검색
+		vres1 = document.getElementById('result1');
+		
+		// 1초마다 한 번씩
+		a = setInterval(function(){
+		
+		// result1의 첫번째 자식을 선택한다.
+		child = result1.firstChild;
+		
+		// 마지막 자식으로 추가한다. -appendChild()
+		vres1.appendChild(child);
+		
+		}, 100);
+
+
 	}
+		
+	
 	
 	function stop(){
+		but = document.getElementById('but')
 		// 시작 버튼 보이기
+		but.style.display = "inline";
 		
 		// 랜덤 발생 - 0 ~ 이미지 갯수만큼
+		// 랜덤발생된번째 자식 이미지에 스타일로 border테두리를 설정한다.
+		vimage = document.getElementsByTagName('img');
+		rand = parseInt(Math.random() * 7);
 		
-		랜덤발생된번째 자식 이미지에 스타일로 border테두리를 설정한다.
+		vimage[rand].style.border = "5px double blue";
+			
+		
+		
+		//////////// 여기부터 뭔지 잘 모름 ///////////
+		vres1 = document.getElementById('result1');
+		
+		child = result1.firstChild;
+		
+		imgtag = document.createElement('img');		
+		/////////////////////////////////////////
+		
+		
 		
 		// 회전을 멈춘다.
+		clearInterval(a);
+		
 	}
 
 </script>
@@ -46,21 +85,21 @@
 		선택한 자식을 맨 마지막 자식으로 추가한다. -appendChild()
 		
 		appendChild() 수행 시 기존의 존재하는 요소를 대상으로 작업 시 이동에 효과가 있다. (잘라내기, 붙여넣기의 효과)
-		--------------------------------------------		
+		----------------------------------------------------------------------------------------		
 		1초마다 result1에서 firstChild검색 첫자식 선택
 		이미 있는 거 선택해서 appendChild로 첫자식을 마지막으로 추가하면 첫자식은 자동으로 지워짐
 		</pre>
 		
-		<input type="button" value="시작" onclick="proc1()">
-		<input type="button" value="종료" onclick="stop()">
+		<input id="but" type="button" value="시작" onclick="proc1(this)">
+		<input type="button" value="종료" onclick="stop(this)">
 		<div id="result1">
-			<img src="" alt="">
-			<img src="" alt="">
-			<img src="" alt="">
-			<img src="" alt="">
-			<img src="" alt="">
-			<img src="" alt="">
-			<img src="" alt="">
+			<img src="../images/국화1.jpg" alt="국화1.jpg">
+			<img src="../images/국화2.jpg" alt="국화2.jpg">
+			<img src="../images/국화3.jpg" alt="국화3.jpg">
+			<img src="../images/국화4.jpg" alt="국화4.jpg">
+			<img src="../images/국화5.jpg" alt="국화5.jpg">
+			<img src="../images/국화6.jpg" alt="국화6.jpg">
+			<img src="../images/국화7.jpg" alt="국화7.jpg">
 		
 		</div>
 	</div>
