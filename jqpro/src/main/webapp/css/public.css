@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+div {
+	width: 100%;
+	height: auto;
+	border: 1px solid red;
+	/*background: yellow;*/
+	background-image: linear-gradient(45deg, white, orange); 
+	margin: 3px;
+}
+
+pre {
+	border: 1px dotted blue;
+	background: lightgray;
+	margin: 10px;
+	padding: 10px;
+	font-size: 1.2em;
+	height: auto;
+}
+
+form {
+	border: 1px solid rgb(214, 122, 124);
+	margin: 30px;
+	padding: 30px;
+	width: 50%;
+}
+
+label {
+	/* 인라인요소에 크기 조절 
+		display : inline(크기 조절 불가) block(줄바뀜)
+		inline-block : 줄이 바뀌지 않으면서 크기 조절 가능 
+	*/
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+}
+
+.box div {
+	margin: 10px;
+	padding: 5px;
+	border: 1px dotted orange;
+	height: auto;
+	background: #dadab2;
+}
+
+.box input[type=button], .box button {
+	margin: 5px;
+	width: 60px;
+	height: 40px;
+	background: blue;
+	color: white;
+	border-radius: 20px;
+}

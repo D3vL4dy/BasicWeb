@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.6.0.min.js"></script>
+
+<script>
+function proc2(h1tag){
+	//h1tag : 호출시 this를 받은 스크립트변수(dom변수)
+	
+	//h1tag.style.display = "none";
+	
+	// hitag  는 jQuery메소드 hide()를 사용할 수 없다.
+	// hitag를 jQuery객체변수로 변환
+	$(h1tag).hide();
+	
+}
+
+
+$(document).ready(function(){ // DOM이 로딩되어 준비가 되면 작업을 시작한다.
+	$('#btn1').on('click', function(){
+		
+		vh1 = document.getElementsByTagName('h1'); // 배열 변수
+		for(i=0; i<vh1.length; i++){
+			vh1[i].style.color = 'red';
+		}
+		
+		vh1[4].style.color = 'green';
+	
+		/*
+		vjh1 = $('h1');	
+		vjh1.css('color', 'red');
+		vjh1.eq(2).css('color', 'green');
+		*/
+	})
+})
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		</pre>
+		
+		<input id="btn1" type="button" value="확인" >
+		<div id="result1">
+			<h1>무궁화 꽃이 피었습니다.</h1>
+			<h1>무궁화 꽃이 피었습니다.</h1>
+			<h1>무궁화 꽃이 피었습니다.</h1>
+			<h1>무궁화 꽃이 피었습니다.</h1>
+			<h1>무궁화 꽃이 피었습니다.</h1>
+		</div>
+	</div>
+
+	<div class="box">
+		<pre>
+			&lt;h1 onclick="proc2()">
+		</pre>
+		
+		<div id="result2">
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.1</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.2</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.3</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.4</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.5</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.6</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.7</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.8</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.9</h1>
+			<h1 onclick="proc2(this)">무궁화 꽃이 피었습니다.10</h1>
+		</div>
+	</div>
+</body>
+</html>
