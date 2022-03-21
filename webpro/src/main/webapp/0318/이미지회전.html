@@ -12,20 +12,17 @@ img {
 }
 </style>
 <script>
-	rem = null;
-	
+	rimg = null;
 	function proc1(but){
-		
 		// 스타일로 설정된 테두리를 지운다. 
-
-		
 		// 초기값 변수 하나를 null로 주고 if(!null) 이렇게 ==> 할인율
-		if(rem != null){
-			rem.parentNode.removeChild(vres1);
+		if(rimg != null){
+			rimg.style.border = "none";
 		}
 		
 		// 시작 버튼 감추기 - 더 이상 클릭하지 못하도록
 		but.style.display = "none";
+		globut = but;
 		
 		// result1을 검색
 		vres1 = document.getElementById('result1');
@@ -34,12 +31,12 @@ img {
 		a = setInterval(function(){
 		
 		// result1의 첫번째 자식을 선택한다.
-		child = result1.firstChild;
+		child = vres1.firstChild;
 		
 		// 마지막 자식으로 추가한다. -appendChild()
 		vres1.appendChild(child);
 		
-		}, 100);
+		}, 200);
 
 
 	}
@@ -47,29 +44,16 @@ img {
 	
 	
 	function stop(){
-		but = document.getElementById('but')
 		// 시작 버튼 보이기
-		but.style.display = "inline";
+		globut.style.display="inline";
 		
 		// 랜덤 발생 - 0 ~ 이미지 갯수만큼
 		// 랜덤발생된번째 자식 이미지에 스타일로 border테두리를 설정한다.
-		vimage = document.getElementsByTagName('img');
 		rand = parseInt(Math.random() * 7);
+		rimg = document.getElementsByTagName('img')[rand];
 		
-		vimage[rand].style.border = "5px double blue";
+		rimg.style.border = "5px double blue";
 			
-		
-		
-		//////////// 여기부터 뭔지 잘 모름 ///////////
-		vres1 = document.getElementById('result1');
-		
-		child = result1.firstChild;
-		
-		imgtag = document.createElement('img');		
-		/////////////////////////////////////////
-		
-		
-		
 		// 회전을 멈춘다.
 		clearInterval(a);
 		
@@ -90,8 +74,8 @@ img {
 		이미 있는 거 선택해서 appendChild로 첫자식을 마지막으로 추가하면 첫자식은 자동으로 지워짐
 		</pre>
 		
-		<input id="but" type="button" value="시작" onclick="proc1(this)">
-		<input type="button" value="종료" onclick="stop(this)">
+		<input type="button" value="시작" onclick="proc1(this)">
+		<input type="button" value="종료" onclick="stop()">
 		<div id="result1">
 			<img src="../images/국화1.jpg" alt="국화1.jpg">
 			<img src="../images/국화2.jpg" alt="국화2.jpg">
