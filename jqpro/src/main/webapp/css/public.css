@@ -43,7 +43,10 @@ label {
 	background: #dadab2;
 }
 
-.box input[type=button], .box button {
+.box input[type=button], 
+.box button,
+.box input[type=reset],
+.box input[type=submit] {
 	margin: 5px;
 	width: 60px;
 	height: 40px;
