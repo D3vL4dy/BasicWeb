@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.6.0.min.js"></script>
+
+<script>
+$(function(){
+	$('#btn1').on('click', function(){
+		//$('img').attr('title', '이미지');
+		
+		$('img').attr('title', function(){
+			// src의 값을 가져온다
+			vsrc = $(this).attr('src');
+			
+			// vsrc에서 마지막 /의 위치 값을 얻는다.
+			start = vsrc.lastIndexOf("/") +1;
+			
+			// vsrc에서 마지막 .의 위치 값을 얻는다.
+			end = vsrc.lastIndexOf(".") +1;
+			
+			// start ~ end사이의 문자를 추출한다.
+			str = vsrc.substring(start, end);
+			
+			return str;	
+		})
+	})
+	
+	$('img').on('click', function(){
+		$(this).removeAttr('title');
+		// 1. title속성을 지운다.
+		// 2. border 테두리를 설정한다.
+		// $(this).css('border', '2px solid red');
+	})
+	
+	$('img').on('mouseover', function(){
+		// border를 설정. 
+		// addClass를 이용한다. 
+		$(this).addClass('iborder');
+	})
+	
+	$('img').on('mouseout', function(){
+		$(this).removeClass('iborder');
+	})
+	
+})
+</script>
+<style>
+img{
+	width: 100px;
+	height: 100px;
+}
+.iborder{
+	border: 2px solid green;
+}
+
+</style>
+</head>
+<body>
+
+	<div class="box">
+		<pre>
+		</pre>
+		
+		<input type="button" value="확인" id="btn1">
+		<div id="result1">
+			<img src="../images/가위_좌.PNG" alt="가위_좌.PNG">
+			<img src="../images/가구1.jpg" alt="가구1.jpg">
+			<img src="../images/가구2.jpg" alt="가구2.jpg">
+			<img src="../images/가구3.jpg" alt="가구3.jpg">
+			<img src="../images/가위_우.PNG" alt="가위_우.PNG">
+		
+		</div>
+	</div>
+</body>
+</html>
