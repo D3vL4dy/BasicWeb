@@ -1,6 +1,7 @@
 package kr.or.ddit.prod.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import kr.or.ddit.buyer.service.BuyerServiceImpl;
 import kr.or.ddit.buyer.service.IBuyerService;
@@ -46,7 +49,8 @@ public class ProdServlet extends HttpServlet {
 
 		// 3. service메서드 호출하기 -> 결과값 리턴 (value)
 		List<ProdVO> list = service.selectByLgu(lgu);
-
+		
+		/* JSP 부분
 		// 4. 결과를 가지고 출력 또는 응답데이터(text, json, xml) 생성
 		// view페이지로 이동
 		// view페이지와 결과값을 공유하기 위해서 request에 저장
@@ -54,6 +58,18 @@ public class ProdServlet extends HttpServlet {
 
 		// 5. view페이지로 forward
 		request.getRequestDispatcher("0330/prodList.jsp").forward(request, response);
+		*/
+		
+		// GSON사용 부분
+		Gson gson = new Gson();
+		// json형태의 문자로 변경
+		String result = gson.toJson(list); // 파라미터로 list를 넣어주면 String으로 리턴 
+		
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print(result);
+		out.flush(); // PrintWriter객체에 있는 내용을 지운다.
 		
 	}
 
@@ -62,7 +78,7 @@ public class ProdServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// idByDetail
+		// selectById
 
 		// 1. 전송시 데이터 받기
 		String id = request.getParameter("id");
@@ -73,12 +89,24 @@ public class ProdServlet extends HttpServlet {
 		// 3. service메서드 호출하기 -> 결과값 리턴 (value)
 		ProdVO vo = service.selectById(id);
 
+		/* JSP사용 부분
 		// 4. request에 결과값을 저장 ("key", value)
 		request.setAttribute("prodId", vo);
 
 		// 5. jsp로 위임(forward)하여 응답데이터 생성 (출력 또는 json데이터)
 		request.getRequestDispatcher("0330/prod_detail.jsp").forward(request, response);
-
+		*/
+		
+		// GSON사용 부분
+		Gson gson = new Gson();
+		String result = gson.toJson(vo);
+		
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.print(result);
+		out.flush(); // PrintWriter객체에 있는 내용을 지운다.
+		
 	}
 
 }
