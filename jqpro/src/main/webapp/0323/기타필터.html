@@ -50,6 +50,25 @@ $(function(){
 		$('#result3').html(str);
 		
 	}) // onclick 끝
+	
+	$('#btn4').on('click', function(){
+		//alert(this.tagName);
+		str = "** visible객체 ** <br>";
+		
+		$('#testForm :hidden').each(function(){
+			if(this.tagName != "BR")
+				str += this.tagName + " -> ";
+			
+			if(this.tagName == "INPUT"){
+				str += $(this).attr('name') + " : " + $(this).val() + "<br>";
+			} else if(this.tagName != "BR"){
+				str += $(this).text() + "<br>";
+			}
+		}) // 반복문 끝
+		
+		$('#result4').html(str);
+		
+	}) // onclick 끝
 }) // $(function) 끝
 </script>
 
