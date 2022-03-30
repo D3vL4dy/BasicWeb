@@ -21,9 +21,11 @@
 		쿼리문에 사용할 VO객체는 패키지 이름을 포함한 전체 이름을 사용해야 한다.
 		그런데 그렇게 되면 이름이 너무 길어질 수가 있기 때문에 전체 이름을 대신할 alias를 설정할 수 있다.
 		형식) <typeAlias alias="alias명" type="클래스의 전체이름"/>
-	 -->
+	 -->   
 	<typeAlias alias="memberVO" type="kr.or.ddit.member.vo.MemberVO"></typeAlias>
 	<typeAlias alias="lprodVO" type="kr.or.ddit.lprod.vo.LprodVO"></typeAlias>
+	<typeAlias alias="buyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"></typeAlias>
+	<typeAlias alias="prodVO" type="kr.or.ddit.prod.vo.ProdVO"></typeAlias>
    
 	<!-- DB와의 연결을 처리하는 부분 -->
 	<transactionManager type="JDBC">
@@ -43,5 +45,7 @@
 	<!-- sqlMapConfig에 등록해야 실행 가능 -->
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/member.xml"></sqlMap>
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/lprod.xml"></sqlMap>
+	<sqlMap resource="kr/or/ddit/ibatis/mapping/buyer.xml"></sqlMap>
+	<sqlMap resource="kr/or/ddit/ibatis/mapping/prod.xml"></sqlMap>
    
 </sqlMapConfig>
