@@ -1,0 +1,38 @@
+MVC - model2
+
+Model - VO, service, dao
+Singleton - 객체를 매번 필요할 때마다 여러 번 생성하지 않는다.
+	   해당 클래스 안에서 객체를 생성하면 다른 클래스에서 필요할 때마다 가져다 쓴다. 
+
+----------------------------------------------------------------------------------------------------
+ servlet (추상클래스) <-- GenericServlet으로 상속됨 <-- HttpServlet
+ : http의 프로토콜을 통해서 response, request를 처리하는  small java program이다.
+
+ - 실행사이클 (해당 클래스에 각 메서드를 overriding해줘야함.)
+    init( ) -> 서비스 시작할 때 자동으로 호출되는 메서드
+    service( ) -> 실제 서비스가 실행되는 부분, 구현하는 서블릿클래스에서 재정의 해야한다.
+          doGet( )
+          doPost( )
+    destroy( ) -> 서비스가 종료될 때 자동으로 호출되는 부분
+
+ MyServlet is HttpServlet
+ HttpServlet is GenericServlet
+ GenericServlet is Servlet
+=> MyServlet is Servlet.
+
+----------------------------------------------------------------------------------------------------
+1. html(jsp) - 요청
+
+2. controller(java, servlet)로 넘김 - java 비즈니스 로직 처리
+   service접근 - service객체가 필요
+
+3. service - dao접근 - dao객체가 필요
+   service객체를 생성 - 리턴하는 메서드
+
+4. dao(Data Access Object) - mapper접근 - sqlMapClient객체가 필요
+   dao객체를 생성 - 리턴하는 메서드
+
+5. 처리 결과 후 출력을 별도의 view페이지로 분리한다.
+-> jsp페이지
+
+-------------------------------------------------------------------------------------------------------------------------
