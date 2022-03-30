@@ -48,7 +48,8 @@
                      
                      $.each(res, function(i, v){
                         
-                        str += "<option value='" + v.id + "'>" + v.name + "</option>"
+                        //str += "<option value='" + v.id + "'>" + v.name + "</option>"
+                        str += "<option value='" + v.prod_id + "'>" + v.prod_name + "</option>" // vo에 해당하는 모든 필드를 바꿔줌 vo와 일치시키기(prod_id)
                      })
                   }else{
                      str += "<option value='0'>데이터없음</option>";
@@ -69,6 +70,7 @@
       // - 결과를 result1에 출력한다.
       // option value=0이면 서버로 보내지 않고 result1의 내용을 지운다.
       // - empty 내용만 지우기
+      // prod_id를 조건으로 해서 prod의 제품 상세보기
       $('#prod').on('change', function(){
     	// prod의 선택한 항목의 option value값 - prod_id값을 가져온다.
     	id = $('option:selected', this).val();
@@ -84,31 +86,13 @@
     				str = "<table>";
     				
     				str += "<tr><td>PROD_ID</td>";
-    				str += "<td>" + res.id + "</td></tr>";
+    				str += "<td>" + res.prod_id + "</td></tr>";
     				
     				str += "<tr><td>PROD_NAME</td>";
-    				str += "<td>" + res.name + "</td></tr>";
+    				str += "<td>" + res.prod_name + "</td></tr>";
     				
     				str += "<tr><td>PROD_LGU</td>";
-    				str += "<td>" + res.lgu + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_BUYER</td>";
-    				str += "<td>" + res.buyer + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_COST</td>";
-    				str += "<td>" + res.cost + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_PRICE</td>";
-    				str += "<td>" + res.price + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_SALE</td>";
-    				str += "<td>" + res.sale + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_SIZE</td>";
-    				str += "<td>" + res.size + "</td></tr>";
-    				
-    				str += "<tr><td>PROD_COLOR</td>";
-    				str += "<td>" + res.color + "</td></tr></table>";
+    				str += "<td>" + res.prod_lgu + "</td></tr>";
     				
     				$('#result1').html(str);
     			},
@@ -118,7 +102,6 @@
     			dataType : 'json'
     		})
     	}
-    	
     	
       })
       
