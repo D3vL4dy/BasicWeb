@@ -50,7 +50,7 @@ public class ProdServlet extends HttpServlet {
 		// 3. service메서드 호출하기 -> 결과값 리턴 (value)
 		List<ProdVO> list = service.selectByLgu(lgu);
 		
-		/* JSP 부분
+		/* JSP 방식
 		// 4. 결과를 가지고 출력 또는 응답데이터(text, json, xml) 생성
 		// view페이지로 이동
 		// view페이지와 결과값을 공유하기 위해서 request에 저장
@@ -60,7 +60,7 @@ public class ProdServlet extends HttpServlet {
 		request.getRequestDispatcher("0330/prodList.jsp").forward(request, response);
 		*/
 		
-		// GSON사용 부분
+		// GSON 방식
 		Gson gson = new Gson();
 		// json형태의 문자로 변경
 		String result = gson.toJson(list); // 파라미터로 list를 넣어주면 String으로 리턴 
@@ -89,7 +89,7 @@ public class ProdServlet extends HttpServlet {
 		// 3. service메서드 호출하기 -> 결과값 리턴 (value)
 		ProdVO vo = service.selectById(id);
 
-		/* JSP사용 부분
+		/* JSP 방식
 		// 4. request에 결과값을 저장 ("key", value)
 		request.setAttribute("prodId", vo);
 
@@ -97,7 +97,7 @@ public class ProdServlet extends HttpServlet {
 		request.getRequestDispatcher("0330/prod_detail.jsp").forward(request, response);
 		*/
 		
-		// GSON사용 부분
+		// GSON 방식
 		Gson gson = new Gson();
 		String result = gson.toJson(vo);
 		
