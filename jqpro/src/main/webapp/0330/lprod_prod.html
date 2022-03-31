@@ -18,14 +18,15 @@
                str = "";
                
                $.each(res, function(i, v){
-                  str += "<option value='" + v.gu + "'>" + v.nm + " </option>"
+                  str += "<option value='" + v.gu + "'>" + v.nm + " </option>";
                })
                
-               $('#lprod').html(str)
+               $('#lprod').html(str);
+               $('#lprod').trigger('change');
                
             },
             error : function(xhr){
-               alert("상태 : " + xhr.status)
+               alert("상태 : " + xhr.status);
             },
             dataType : 'json'
          })
@@ -49,14 +50,16 @@
                      $.each(res, function(i, v){
                         
                         //str += "<option value='" + v.id + "'>" + v.name + "</option>"
-                        str += "<option value='" + v.prod_id + "'>" + v.prod_name + "</option>" // vo에 해당하는 모든 필드를 바꿔줌 vo와 일치시키기(prod_id)
+                        str += "<option value='" + v.prod_id + "'>" 
+                        			+ v.prod_name + "</option>"; // vo에 해당하는 모든 필드를 바꿔줌 vo와 일치시키기(prod_id)
                      })
                   }else{
                      str += "<option value='0'>데이터없음</option>";
                      $('#result1').empty();
                   }
                   
-                  $('#prod').html(str)
+                  $('#prod').html(str);
+                  $('#prod').trigger('change');
                   
                },
     		  error : function(xhr){
@@ -113,16 +116,27 @@
 
 </head>
 <body>
+	<div class="box">
+		<pre></pre>
+		<input type="button" value="확인" id="btn1">
 
-   <div class="box">
-      <pre>
-       </pre>
-       <input type="button" value="확인" id="btn1">
-       
-       <select id="lprod"></select>
-       <select id="prod"></select>
-       
-       <div id="result1"></div>
-   </div>
+		<!--        <select id="lprod"></select> -->
+		<!--        <select id="prod"></select> -->
+
+		<div class="container">
+			<h2>lprod_prod</h2>
+			<form>
+				<div class="form-group">
+					<label for="lprod">lprod list</label> 
+					<select class="form-control" id="lprod" name="sellist1"></select> 
+					<br> 
+					<label for="prod">prod list</label> 
+					<select class="form-control" id="prod" name="sellist2"></select>
+				</div>
+			</form>
+		</div>
+
+		<div id="result1"></div>
+	</div>
 </body>
 </html>
