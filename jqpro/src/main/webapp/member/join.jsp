@@ -11,6 +11,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script src="../js/jquery.serializejson.min.js"></script>
 </head>
 
 <script>
@@ -99,6 +101,34 @@ $(function(){
 		$('#myModal').modal('hide');
 	})
 	
+	$('form').on('submit', function(){
+		// form에서 입력한 모든 값을 가져온다. (서버로 전송하기 위해)
+		fdata1 = $('form').serialize();
+		fdata2 = $('form').serializeArray();
+		fdata3 = $('form').serializeJSON(); // 여러 데이터를 한번에 가져오려고 사용
+		
+		console.log(fdata1);
+		console.log(fdata2);
+		console.log(fdata3);
+		
+		$.ajax({
+			url : '<%= request.getContextPath()%>/Insert.do',
+			data : fdata3,
+			type : 'post',
+			success : function(res){
+				//alert(res.flag);
+				$('#joinspan').html(res.flag).css('color', 'red');
+			},
+			error : function(xhr){
+				alert("상태 : " + xhr.status);
+			},
+			dataType : 'json'
+		})
+		
+		return false;
+		
+	})
+	
 })
 </script>
 <style>
@@ -133,15 +163,15 @@ $(function(){
 			</div>
 			
 			<div class="form-group">
-				<label for="bir">생년월일</label>
-				<input type="date" class="form-control col-sm-3" id="bir" placeholder="Enter birth" name="mem_bir" required>
+				<label for="pwd">비밀번호</label>
+				<input type="password" class="form-control col-sm-3" id="pwd" placeholder="Enter password" name="mem_pass" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="pwd">비밀번호</label>
-				<input type="password" class="form-control col-sm-3" id="pwd" placeholder="Enter password" name="mem_pass" required>
+				<label for="bir">생년월일</label>
+				<input type="date" class="form-control col-sm-3" id="bir" placeholder="Enter birth" name="mem_bir" required>
 				<div class="valid-feedback">Valid.</div>
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
@@ -184,15 +214,8 @@ $(function(){
 				<div class="invalid-feedback">Please fill out this field.</div>
 			</div>
 	    
-			<div class="form-group form-check">
-				<label class="form-check-label">
-		        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-		        <div class="valid-feedback">Valid.</div>
-		        <div class="invalid-feedback">Check this checkbox to continue.</div>
-		      </label>
-		    </div>
-	    
 	    	<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+	    	<span id="joinspan"></span>
 		</form>
 	</div>
 	
