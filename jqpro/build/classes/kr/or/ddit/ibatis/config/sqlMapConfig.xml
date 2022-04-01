@@ -27,6 +27,7 @@
 	<typeAlias alias="buyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"></typeAlias>
 	<typeAlias alias="prodVO" type="kr.or.ddit.prod.vo.ProdVO"></typeAlias>
 	<typeAlias alias="zipVO" type="kr.or.ddit.member.vo.ZipVO"></typeAlias>
+	<typeAlias alias="zipVO2" type="kr.or.ddit.zip.vo.ZipVO"></typeAlias>
    
 	<!-- DB와의 연결을 처리하는 부분 -->
 	<transactionManager type="JDBC">
@@ -49,5 +50,6 @@
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/buyer.xml"></sqlMap>
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/prod.xml"></sqlMap>
 	<sqlMap resource="kr/or/ddit/ibatis/mapping/zip.xml"></sqlMap>
+	<sqlMap resource="kr/or/ddit/ibatis/mapping/ziptable.xml"></sqlMap>
    
 </sqlMapConfig>
