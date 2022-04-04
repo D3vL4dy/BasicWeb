@@ -19,7 +19,7 @@ public class MemberServiceImpl implements IMemberService{
 	}
 	
 	public static IMemberService getInstance() {
-		if(service==null)
+		if(service == null)
 			service = new MemberServiceImpl();
 		
 		return service;
