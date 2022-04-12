@@ -26,7 +26,7 @@ public class BoardDaoImpl implements IBoardDao{
 	}
 	
 	@Override
-	public List<BoardVO> selectList(Map<String, Integer> map) throws SQLException {
+	public List<BoardVO> selectList(Map<String, Object> map) throws SQLException {
 //		List<BoardVO> list = null;
 //		
 //		list = client.queryForList("board.selectList", map);
@@ -36,9 +36,15 @@ public class BoardDaoImpl implements IBoardDao{
 	}
 
 	@Override
-	public int totalCount() throws SQLException {
+	public int totalCount(Map<String, String> map) throws SQLException {
 		
-		return (int)client.queryForObject("board.totalCount"); // 결과가 1개면 queryForObject
+		// stype, sword가 들어있는 map을 리턴해 xml실행
+		return (int)client.queryForObject("board.totalCount", map); // 결과가 1개면 queryForObject
+	}
+
+	@Override
+	public int deleteBoard(int num) throws SQLException {
+		return (int)client.delete("board.deleteBoard", num);
 	}
 	
 }
