@@ -10,7 +10,7 @@
 		<dynamic prepend=" where">
 			<isNotEmpty property="stype" prepend=" and ">
 				<isNotEmpty property="sword">
-					$stype$ like #sword# || '%'
+					$stype$ like '%' || #sword# || '%' <!-- sword를 포함하는 것 -->
 				</isNotEmpty>
 			</isNotEmpty>
 		</dynamic>
@@ -35,6 +35,10 @@
 		 <include refid="dynamicCondition"/> <!-- stype, sword가 있으면 수행 -->
 	
 	</select>
+	
+	<delete id="deleteBoard" parameterClass="int">
+		delete from board1 where num = #data#
+	</delete>
 
 
 </sqlMap>
