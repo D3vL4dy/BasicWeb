@@ -18,4 +18,9 @@ public interface IBoardService {
 	
 	// 글 삭제
 	public int deleteBoard(int num);
+	
+	// 조회수 증가
+	public int updateHit(int num);
+	
+	
 }
