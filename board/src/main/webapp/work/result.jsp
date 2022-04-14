@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	//서블릿에서 공유 데이터 꺼내기
-   int res = (int)request.getAttribute("res");
+   int res = (int)request.getAttribute("resultJSPres"); // resultJSPres이름으로 res 꺼내기
    if(res > 0) {
 %>
 { "sw" : "성공" }

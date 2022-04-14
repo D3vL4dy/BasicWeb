@@ -82,7 +82,7 @@ h1 {
 <script>
 currentPage = 1;
 reply = { }; // 객체 생성
-
+board = { };
 $(function() {
    typevalue = "";
    wordvalue = "";
@@ -126,13 +126,30 @@ $(function() {
       
       if(actionName == "modify") {
          alert(actionIdx + "번 글을 수정합니다.");
+         
+         // 수정창을 띄우기 -  수정할 내용(원래 내용)들을 출력
+         bcard = $(this).parents('.card');
+         subject = bcard.find('a').text();
+         writer = $(bcard).find('.bwr').text();
+         mail = $(bcard).find('.bma').text();
+         cont = $(bcard).find('.p3').html();
+         cont = cont.replace(/<br>/g, "\n");
+         
+         $('#modiModal #writer').val(writer);
+         $('#modiModal #subject').val(subject);
+         $('#modiModal #mail').val(mail);
+         $('#modiModal #content').val(cont);
+         $('#modiModal #num').val(actionIdx);
+         
+         $('#modiModal #writer').prop('disabled', true);
+         
       } else if(actionName == "delete") {
-         alert(actionIdx + "번 글을 삭제합니다.");
+         //alert(actionIdx + "번 글을 삭제합니다.");
          
          boardDelete();
          
       } else if(actionName == "reply") {
-         alert(actionIdx + "번 글에 댓글을 답니다.");
+         //alert(actionIdx + "번 글에 댓글을 답니다.");
       
          // 입력한 내용 - cont
          // 글번호 - bnum - actionIdx
@@ -157,24 +174,34 @@ $(function() {
          $(this).prev().val("");
          
       } else if(actionName == "title") {
-         alert(actionIdx + "번의 댓글을 출력합니다.");
+         //alert(actionIdx + "번의 댓글을 출력합니다.");
          
+         // 댓글리스트 출력
          replyList(this);
+         
+         // 조회수 증가
+         vclass = $(this).parents('.card').find('.show').attr('class');
+         
+         //alert(vclass);
+         if(typeof vclass == "undefined") {
+            readHit(this);
+         }
+         
+         
       } else if(actionName == "r_delete") {
-         alert(actionIdx + "번 댓글을 삭제합니다.");
+         //alert(actionIdx + "번 댓글을 삭제합니다.");
          
          replyDelete(this);
       } else if(actionName == "r_modify") {
-         alert(actionIdx + "번 댓글을 수정합니다.");
-         
-         // 댓글 수정폼의 css속성값을 가져온다.
-         if($('#modifyform').css('display') != "none"){
-        	 // 다른 곳에 수정폼이 이미 열려있다.
-        	 // 수정폼을 body로 다시 append
-        	 // 원래 내용을 원래 위치로 환원시킨다.
-        	 replyReset();
+         //alert(actionIdx + "번 댓글을 수정합니다.");
+
+         // 댓글 수정폼의 css속성값을 가져온다
+         if($('#modifyform').css('display') != "none") {
+            // 다른 곳에 수정폼이 이미 열려있다
+            // 수정폼을 body로 다시 append
+            // 원래 내용을 원래 위치로 환원
+            replyReset();
          }
-         
          
          // 원래 내용(수정할 내용) 가져오기
          p3cont = $(this).parents('.rcode').find('.p3').html();
@@ -191,47 +218,80 @@ $(function() {
       
    })
    
-   function replyReset(){
-	   // p3찾기 
-	   vp3 = $('#modifyform').parent();
-	   
-	   // 수정폼을 body로 이동, 감추기
-	   $('body').append($('#modifyform'));
-	   $('#modifyform').hide();
-	   
-	   // 원래 데이터 환원
-	   $(vp3).html(p3cont)
+   function replyReset() {
+      // p3찾기
+      vp3 = $('#modifyform').parent();
+      
+      // 수정폼을 body로 이동, 감추기
+      $('body').append($('#modifyform'));
+      $('#modifyform').hide();
+      
+      // 원래 데이터 환원
+      $(vp3).html(p3cont);
    }
    
-   // 댓글수정창에서 취소버튼 클릭
-   $('#btnreset').on('click', function(){
-	   replyReset();
+   // 댓글 수정창에서 취소버튼 클릭
+   $('#btnreset').on('click', function() {
+      replyReset();
    })
    
-   // 댓글수정창에서 확인버튼 클릭
-   $('#btnok').on('click', function(){
+   // 댓글 수정창에서 확인버튼 클릭
+   $('#btnok').on('click', function() {
+      // 수정입력 내용 가져오기 -\r\n이 포함되어 있다
+      modiCont = $('#modifyform textarea').val();
+      
+      // 환원할 위치 = p3
+      vp3 = $('#modifyform').parent();
+      
+      // 수정폼을 body로 이동, 감추기
+      $('body').append($('#modifyform'));
+      $('#modifyform').hide();
+      
+      // modiCont 내용을 <br>태그로 바꿔서 p3위치에 표시
+      modishow = modiCont.replace(/\r/g, "").replace(/\n/g, "<br>");
+      
+      //vp3.html(modishow);
+      
+      //db에서 수정
+      reply.renum = actionIdx;
+      reply.cont = modiCont;
+      replyUpdate();
+   })
+   
+   // 글 수정 모달창에서 내용을 수정 후 전송버튼 클릭
+   $('#modisend').on('click', function(){
+	   alert(actionIdx + "번 글을 수정하러 갑니다.");
 	   
-	   // 수정입력 내용 가져오기 - \r\n이 포함되어 있다.
-	   modiCont = $('#modifyform textarea').val();
+	   // 수정 내용을 가져온다
+	   wr = $('#modiModal #writer').val();
+       sub = $('#modiModal #subject').val();
+       mail = $('#modiModal #mail').val();
+       cont = $('#modiModal #content').val();
+       
+       // 객체에 저장
+       board.writer = wr;
+       board.subject = sub;
+       board.mail = mail;
+       board.content = cont;
+       board.num = actionIdx;
+    	   
+	   // ajax서버로 보내기
+	   //boardUpdate();
 	   
-	   // 환원할 위치 = p3
-	   vp3 = $('#modifyform').parent();
+	   // db에서 수정을 성공한 후 할 일 -> ajax의 success부분에서 코딩 할 일
+	   // 입력한 내용을 card본문으로 다시 출력한다.
 	   
-	   // 수정폼을 body로 이동, 감추기
-	   $('body').append($('#modifyform'));
-	   $('#modifyform').hide();
-	   
-	   // modiCont 내용을 <br>태그로 바꿔서 p3위치에 출력표시
-	   modishow = modiCont.replace(/\r/g,"")
-	   						.replace(/\n/g,"<br>");
-	   
-	   //vp3.html(modiCont);
-	   
-	   // db에서 수정 -
-	   reply.renum = actionIdx;
-	   reply.cont = modiCont;
-	   replyUpdate();
-	   
+       cont = cont.replace(/\r/g, "").replace(/\n/g, "<br>");
+       
+       // 가져온 내용을 본문에 찍기
+       $(bcard).find('a').text(sub);
+       $(bcard).find('.bwr').text(wr);
+       $(bcard).find('.bma').text(mail);
+       $(bcard).find('.p3').html(cont);
+       
+       // 창 닫기
+       $('#modiModal').modal('hide');
+       
    })
 })
 </script>
@@ -268,5 +328,42 @@ $(function() {
 	<br>
 	<br>
 	<div id="pagelist"></div>
+
+	<!-- The Modal -->
+	<div class="modal" id="modiModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form id="modiForm">
+						<label>작성자</label> <input type="text" id="writer" name="writer"><br>
+
+						<label>제목</label> <input type="text" id="subject" name="subject"><br>
+
+						<label>이메일</label> <input type="text" id="mail" name="mail"><br>
+
+						<label>내용</label><br>
+						<textarea id="content" name="content" rows="10" cols="50"></textarea>
+
+						<br> <input type="hidden" name="num" id="num"> <input
+							type="button" id="modisend" value="전송">
+					</form>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>
